@@ -6,13 +6,8 @@ The Platforms I have adventured:-
 3. CSES Problem Set
 4. CodeAbbey
 5. CodeChef
-6. CodeWars
-7. Coding Ninjas
-8. Daily Coding Problems
-9. Exercism
-10. HackerRank
-11. Kattis
-12. LeetCode
-13. Project Euler
-14. SPOJ
-15. szkpol
+6. Daily Coding Problems
+7. HackerRank
+8. LeetCode
+9. Project Euler
+10. SPOJ
