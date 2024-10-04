@@ -1,1 +1,9 @@
+# Ignore the .DS_Store files (common on macOS)
 .DS_Store
+
+# Ignore all .vscode folders and their contents
+.vscode/
+
+# Ignore all .cph folders and their contents
+.cph/
+

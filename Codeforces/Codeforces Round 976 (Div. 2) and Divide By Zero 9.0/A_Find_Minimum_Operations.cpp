@@ -1,7 +1,4 @@
-#pragma GCC optimize("Ofast")
-#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
-#pragma GCC optimize("unroll-loops")
-#include <bits/stdc++.h> 
+#include <iostream>
 #include <complex>
 #include <queue>
 #include <set>
@@ -37,6 +34,7 @@ typedef vector<p32> vp32;
 ll MOD = 998244353;
 double eps = 1e-12;
 #define forn(i,e) for(ll i = 0; i < e; i++)
+#define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
 #define forsn(i,s,e) for(ll i = s; i < e; i++)
 #define rforn(i,s) for(ll i = s; i >= 0; i--)
 #define rforsn(i,s,e) for(ll i = s; i >= e; i--)
@@ -52,27 +50,25 @@ double eps = 1e-12;
 #define sz(x) ((ll)(x).size())
 #define max(a,b) a > b ? a : b
 #define min(a,b) a > b? b : a
+#define ipt(n,r) forn(i,n) cin >> r[i];
+#define ys cout << "YES" << endl;
+#define no cout << "NO" << endl;
 
 
-void solve(){
-    ll n,m,sx,sy,d;
-    cin >> n >> m >> sx >> sy >> d;
-    ll q1 = abs(n-sx)+abs(m-sy);
-    bool f1 = d >= (sx-1);
-    bool f2 = d >= (n-sx);
-    bool f3 = d >= (m-sy);
-    bool f4 = d >= (sy-1);;
-    if(d >= q1)
-    {
-        cout << -1 << endl;
-        return;
+void solve() {
+    ll n,k;
+    cin >> n >> k;
+    if(n < k || k <= 1) {
+        cout << n << endl;
     }
-    else
-    {
-        if((!f1 && !f3) || (!f2 && !f4))
-            cout << n+m-2 << endl;
-        else
-            cout << -1 << endl;
+    else {
+        ll cnt = 0;
+        while(n >= k) {
+            cnt += n % k;
+            n = n / k;
+        }
+        cnt += (n);
+        cout << cnt << endl;
     }
 }
 
