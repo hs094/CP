@@ -9,6 +9,8 @@ clean:
 	find . -type f -name '*dSYM' -exec rm -f {} +
 	# Remove directories ending with '.bin.dSYM'
 	find . -type d -name '*.bin.dSYM' -exec rm -rf {} +
+	# Remove all .cph folders
+	find . -type d -name "*.cph" -exec rm -rf {} \;
 
 # Optional: Add a phony target to avoid conflicts with files named 'clean'
 .PHONY: clean
