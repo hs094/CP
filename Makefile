@@ -11,6 +11,8 @@ clean:
 	find . -type d -name '*.bin.dSYM' -exec rm -rf {} +
 	# Remove all .cph folders
 	find . -type d -name "*.cph" -exec rm -rf {} \;
+	# Remove all .vscode folders
+	find . -type d -name "*.vscode" -exec rm -rf {} \;
 
 # Optional: Add a phony target to avoid conflicts with files named 'clean'
 .PHONY: clean
