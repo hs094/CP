@@ -1,7 +1,4 @@
-#pragma GCC optimize("Ofast")
-#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
-#pragma GCC optimize("unroll-loops")
-#include <bits/stdc++.h> 
+#include <iostream> 
 #include <complex>
 #include <queue>
 #include <set>
@@ -37,6 +34,7 @@ typedef vector<p32> vp32;
 ll MOD = 998244353;
 double eps = 1e-12;
 #define forn(i,e) for(ll i = 0; i < e; i++)
+#define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
 #define forsn(i,s,e) for(ll i = s; i < e; i++)
 #define rforn(i,s) for(ll i = s; i >= 0; i--)
 #define rforsn(i,s,e) for(ll i = s; i >= e; i--)
@@ -52,39 +50,23 @@ double eps = 1e-12;
 #define sz(x) ((ll)(x).size())
 #define max(a,b) a > b ? a : b
 #define min(a,b) a > b? b : a
+#define ipt(n,r) forn(i,n) cin >> r[i];
 #define ys cout << "YES" << endl;
 #define no cout << "NO" << endl;
 
 
 void solve(){
-    ll H,W;
-    cin >> H >> W;
-    vector<string> v(H);
-    forn(i,H)
-    {
-        cin >> v[i];
-    }
-    vector<ll> x(W,0);
-    forn(i,W)
-    {
-        forn(j,H)
-        {
-            x[i]+=v[j][i]=='#';
-        }
-    }
-    forn(i,W)
-    {
-        cout << x[i] << " ";
-    }
-    cout << endl;
+    ll n,a,b;
+    cin >> n >> a >> b;
+    if(abs(a-b) & 1) cout << "NO" << endl;
+    else cout << "YES" << endl;
 }
-
 
 int main()
 {
  fast_cin();
  ll t;
- t = 1;
+ cin >> t;
  for(int it=1;it<=t;it++) {
     solve();
  }
