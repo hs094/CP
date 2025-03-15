@@ -1,6 +1,5 @@
 #include <bits/stdc++.h> 
 using namespace std;
-double eps = 1e-12;
 
 typedef long long ll;
 typedef long double ld;
@@ -9,11 +8,14 @@ typedef pair<ll,ll> p64;
 typedef pair<double,double> pdd;
 typedef vector<ll> v64;
 typedef vector<int> v32;
-typedef vector<vector<int> > vv32;
-typedef vector<vector<ll> > vv64;
+typedef vector<vector<int>> vv32;
+typedef vector<vector<ll>> vv64;
 typedef vector<vector<p64> > vvp64;
 typedef vector<p64> vp64;
 typedef vector<p32> vp32;
+
+ll MOD = 998244353;
+double eps = 1e-12;
 
 #define forn(i,e) for(ll i = 0; i < e; i++)
 #define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
@@ -38,16 +40,33 @@ typedef vector<p32> vp32;
 
 
 void solve(){
-    
+    ll n;
+    cin >> n;
+    vector<ll> v(n);
+    map<ll,set<ll>> mp;
+    forn(i,n) {
+        cin >> v[i];
+        mp[v[i]].insert(i);
+    }
+    int mn = INT_MAX;
+    for(auto it: mp) {
+        if(it.second.size() >= 2) {
+            auto x1 = it.second.begin();
+            auto x2 = it.second.begin();
+            x2++;
+            while(x1 != it.second.end() && x2 != it.second.end()) {
+                mn = min(mn, *(x2)-*(x1)+1);
+                x1++;
+                x2++;
+            }
+        }
+    }
+    cout << ((mn == INT_MAX) ? -1 : mn) << endl;
 }
 
 signed main()
 {
  fast_cin();
- ll t;
- cin >> t;
- forsn(it, 1, t+1) {
-    solve();
- }
+ solve();
  return 0;
 }

@@ -9,8 +9,8 @@ typedef pair<ll,ll> p64;
 typedef pair<double,double> pdd;
 typedef vector<ll> v64;
 typedef vector<int> v32;
-typedef vector<vector<int> > vv32;
-typedef vector<vector<ll> > vv64;
+typedef vector<vector<int>> vv32;
+typedef vector<vector<ll>> vv64;
 typedef vector<vector<p64> > vvp64;
 typedef vector<p64> vp64;
 typedef vector<p32> vp32;
@@ -38,16 +38,22 @@ typedef vector<p32> vp32;
 
 
 void solve(){
-    
+    ll n;
+    cin >> n;
+    vector<ll> v(n);
+    forn(i,n) cin >> v[i];
+    forn(i,n-1) {
+        if(v[i] >= v[i+1]) {
+            cout << "No" << endl;
+            return;
+        }
+    }
+    cout << "Yes" << endl;
 }
 
 signed main()
 {
  fast_cin();
- ll t;
- cin >> t;
- forsn(it, 1, t+1) {
-    solve();
- }
+ solve();
  return 0;
 }

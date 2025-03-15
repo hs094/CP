@@ -1,6 +1,5 @@
 #include <bits/stdc++.h> 
 using namespace std;
-double eps = 1e-12;
 
 typedef long long ll;
 typedef long double ld;
@@ -9,11 +8,14 @@ typedef pair<ll,ll> p64;
 typedef pair<double,double> pdd;
 typedef vector<ll> v64;
 typedef vector<int> v32;
-typedef vector<vector<int> > vv32;
-typedef vector<vector<ll> > vv64;
+typedef vector<vector<int>> vv32;
+typedef vector<vector<ll>> vv64;
 typedef vector<vector<p64> > vvp64;
 typedef vector<p64> vp64;
 typedef vector<p32> vp32;
+
+ll MOD = 998244353;
+double eps = 1e-12;
 
 #define forn(i,e) for(ll i = 0; i < e; i++)
 #define rep(x,start,end) for(auto x=(start)-((start)>(end));x!=(end)-((start)>(end));((start)<(end)?x++:x--))
@@ -33,21 +35,27 @@ typedef vector<p32> vp32;
 #define max(a,b) (a > b) ? a : b
 #define min(a,b) (a > b) ? b : a
 #define ipt(n,r) forn(i,n) cin >> r[i];
-#define ys cout << "YES" << endl;
-#define no cout << "NO" << endl;
+#define ys cout << "Yes" << endl;
+#define no cout << "No" << endl;
 
 
 void solve(){
-    
+    ll n;
+    cin >> n;
+    vector<ll> v(n);
+    forn(i,n) cin >> v[i];
+    forn(i,n-2) {
+        if(v[i] == v[i+1] && v[i] == v[i+2]) {
+            ys
+            return;
+        }
+    }
+    no
 }
 
 signed main()
 {
  fast_cin();
- ll t;
- cin >> t;
- forsn(it, 1, t+1) {
-    solve();
- }
+ solve();
  return 0;
 }
