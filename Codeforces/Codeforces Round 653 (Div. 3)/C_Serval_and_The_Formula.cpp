@@ -38,27 +38,34 @@ double eps = 1e-12;
 
 void solve()
 {
-    ll n, w;
-    cin >> n >> w;
-    vector<ll> W(n), V(n);
-    forn(i, n) cin >> W[i] >> V[i];
-    vector<vector<ll>> dp(n, vector<ll>(w + 1, 0));
-    if(W[0] <= w)
-        dp[0][W[0]] = V[0];
-    ll ans = dp[0][W[0]];
-    for(ll i = 1; i < n; i++) {
-        for(ll j = 0; j <= w; j++) {
-            dp[i][j] = dp[i-1][j];
-            if(j >= W[i]) dp[i][j] = max(dp[i][j], dp[i-1][j-W[i]] + V[i]);
-            ans = max(ans, dp[i][j]);
+    ll l = 0, r = 1e18;
+    ll x,y;
+    cin >> x >> y;
+    while(l <= r) {
+        ll k = l + (r-l)/2.0;
+        ll val = (x+y+2*k) - (x+k)^(y+k);
+        if(val == 0ll) {
+            cout << k << endl;
+            return;
+        }
+        else if(val > 0) {
+            r = k-1;
+        }
+        else {
+            l = k+1;
         }
     }
-    cout << ans << endl;
+    cout << -1 << endl;
 }
 
 signed main()
 {
     fast_cin();
-    solve();
+    ll t;
+    cin >> t;
+    forsn(it, 1, t + 1)
+    {
+        solve();
+    }
     return 0;
 }

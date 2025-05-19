@@ -38,22 +38,23 @@ double eps = 1e-12;
 
 void solve()
 {
-    ll n, w;
-    cin >> n >> w;
-    vector<ll> W(n), V(n);
-    forn(i, n) cin >> W[i] >> V[i];
-    vector<vector<ll>> dp(n, vector<ll>(w + 1, 0));
-    if(W[0] <= w)
-        dp[0][W[0]] = V[0];
-    ll ans = dp[0][W[0]];
-    for(ll i = 1; i < n; i++) {
-        for(ll j = 0; j <= w; j++) {
-            dp[i][j] = dp[i-1][j];
-            if(j >= W[i]) dp[i][j] = max(dp[i][j], dp[i-1][j-W[i]] + V[i]);
-            ans = max(ans, dp[i][j]);
+    ll n;
+    cin >> n;
+    vector<ld> p(n);
+    forn(i,n) cin >> p[i];
+    vector<vector<ld>> dp(n+1, vector<ld> (n+1, 0ll));
+    dp[0][0] = 1.00;
+    for(ll i=0;i<n;i++) {
+        for(ll j=0;j<=i;j++) {
+            dp[i+1][j+1] += dp[i][j] * p[i];
+            dp[i+1][j] += dp[i][j] * (1-p[i]);
         }
     }
-    cout << ans << endl;
+    ld ans = 0;
+    for(ll i=0;i<=n;i++) {
+        if(i > n-i) ans += dp[n][i];
+    }
+    cout << fixed << setprecision(20) << ans << endl;
 }
 
 signed main()

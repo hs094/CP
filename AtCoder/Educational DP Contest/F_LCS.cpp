@@ -18,7 +18,7 @@ ll MOD = 998244353;
 double eps = 1e-12;
 
 #define forn(i, e) for (ll i = 0; i < e; i++)
-#define rep(x, start, end) for (auto x = (start) - ((start) > (end)); x != (end) - ((start) > (end)); ((start) < (end) ? x++ : x--))
+#define rep(x, start, end) for (auto x = (start) - ((start) > (end)); x != (end) - ((start) > (end)); ((start) < (end) ? x++ : x--)
 #define forsn(i, s, e) for (ll i = s; i < e; i++)
 #define rforn(i, s) for (ll i = s; i >= 0; i--)
 #define rforsn(i, s, e) for (ll i = s; i >= e; i--)
@@ -36,28 +36,40 @@ double eps = 1e-12;
 #define ys cout << "YES" << endl;
 #define no cout << "NO" << endl;
 
-void solve()
-{
-    ll n, w;
-    cin >> n >> w;
-    vector<ll> W(n), V(n);
-    forn(i, n) cin >> W[i] >> V[i];
-    vector<vector<ll>> dp(n, vector<ll>(w + 1, 0));
-    if(W[0] <= w)
-        dp[0][W[0]] = V[0];
-    ll ans = dp[0][W[0]];
-    for(ll i = 1; i < n; i++) {
-        for(ll j = 0; j <= w; j++) {
-            dp[i][j] = dp[i-1][j];
-            if(j >= W[i]) dp[i][j] = max(dp[i][j], dp[i-1][j-W[i]] + V[i]);
-            ans = max(ans, dp[i][j]);
+void solve() {
+    string s, t;
+    cin >> s >> t;
+    ll n = s.size(), m = t.size();
+    vector<vector<ll>> dp(n + 1, vector<ll>(m + 1, 0));
+
+    for (ll i = 1; i <= n; i++) {
+        for (ll j = 1; j <= m; j++) {
+            if (s[i - 1] == t[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            } else {
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
         }
     }
-    cout << ans << endl;
+
+    ll i = n, j = m;
+    string r;
+    while (i > 0 && j > 0) {
+        if (s[i - 1] == t[j - 1]) {
+            r += s[i - 1];
+            i--;
+            j--;
+        } else if (dp[i - 1][j] < dp[i][j - 1]) {
+            j--;
+        } else {
+            i--;
+        }
+    }
+    reverse(r.begin(), r.end());
+    cout << r << endl;
 }
 
-signed main()
-{
+int main() {
     fast_cin();
     solve();
     return 0;

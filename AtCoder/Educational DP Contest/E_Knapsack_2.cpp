@@ -36,24 +36,22 @@ double eps = 1e-12;
 #define ys cout << "YES" << endl;
 #define no cout << "NO" << endl;
 
+vector<ll> W, V;
+ll rec(ll i, ll sum_w, ll w, ll n) {
+    if(i < 0) return 0;
+    if(sum_w + W[i] <= w)
+        return max(rec(i-1, sum_w, w, n), rec(i-1, sum_w + W[i], w, n) + V[i]);
+    else 
+        return rec(i-1, sum_w, w, n);
+}
 void solve()
 {
-    ll n, w;
+    ll n,w;
     cin >> n >> w;
-    vector<ll> W(n), V(n);
-    forn(i, n) cin >> W[i] >> V[i];
-    vector<vector<ll>> dp(n, vector<ll>(w + 1, 0));
-    if(W[0] <= w)
-        dp[0][W[0]] = V[0];
-    ll ans = dp[0][W[0]];
-    for(ll i = 1; i < n; i++) {
-        for(ll j = 0; j <= w; j++) {
-            dp[i][j] = dp[i-1][j];
-            if(j >= W[i]) dp[i][j] = max(dp[i][j], dp[i-1][j-W[i]] + V[i]);
-            ans = max(ans, dp[i][j]);
-        }
-    }
-    cout << ans << endl;
+    W.resize(n);
+    V.resize(n);
+    forn(i,n) cin >> W[i] >> V[i];
+    cout << rec(n-1, 0, w, n) << endl;
 }
 
 signed main()

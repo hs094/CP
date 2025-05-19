@@ -38,19 +38,27 @@ double eps = 1e-12;
 
 void solve()
 {
-    ll n, w;
-    cin >> n >> w;
-    vector<ll> W(n), V(n);
-    forn(i, n) cin >> W[i] >> V[i];
-    vector<vector<ll>> dp(n, vector<ll>(w + 1, 0));
-    if(W[0] <= w)
-        dp[0][W[0]] = V[0];
-    ll ans = dp[0][W[0]];
-    for(ll i = 1; i < n; i++) {
-        for(ll j = 0; j <= w; j++) {
-            dp[i][j] = dp[i-1][j];
-            if(j >= W[i]) dp[i][j] = max(dp[i][j], dp[i-1][j-W[i]] + V[i]);
-            ans = max(ans, dp[i][j]);
+    ll n,m,x,y;
+    cin >> n >> m;
+    vector<vector<ll>> G(n+1);
+    vector<int> R(n+1), D(n+1);
+    forn(i,m) {
+        cin >> x >> y;
+        G[x].pb(y);
+        R[y]++;
+    }
+    vector<ll> Q;
+    forsn(i,1,n+1) if(R[i] == 0) Q.pb(i);
+    ll ans = 0;
+    while(!Q.empty()) {
+        int x = Q.back();
+        Q.pop_back();
+        if(ans < D[x]) 
+            ans = D[x];
+        for(auto &y: G[x]) {
+            R[y]--;
+            D[y] = max(D[y], D[x]+1);
+            if(R[y] == 0) Q.pb(y);
         }
     }
     cout << ans << endl;
@@ -62,3 +70,4 @@ signed main()
     solve();
     return 0;
 }
+

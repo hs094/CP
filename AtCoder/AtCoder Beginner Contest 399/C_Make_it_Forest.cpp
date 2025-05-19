@@ -36,24 +36,52 @@ double eps = 1e-12;
 #define ys cout << "YES" << endl;
 #define no cout << "NO" << endl;
 
-void solve()
-{
-    ll n, w;
-    cin >> n >> w;
-    vector<ll> W(n), V(n);
-    forn(i, n) cin >> W[i] >> V[i];
-    vector<vector<ll>> dp(n, vector<ll>(w + 1, 0));
-    if(W[0] <= w)
-        dp[0][W[0]] = V[0];
-    ll ans = dp[0][W[0]];
-    for(ll i = 1; i < n; i++) {
-        for(ll j = 0; j <= w; j++) {
-            dp[i][j] = dp[i-1][j];
-            if(j >= W[i]) dp[i][j] = max(dp[i][j], dp[i-1][j-W[i]] + V[i]);
-            ans = max(ans, dp[i][j]);
+struct DSU {
+    vector<int> parent, rank;
+    
+    DSU(int n) : parent(n+1), rank(n+1, 0) {
+        for (int i = 1; i <= n; i++) {
+            parent[i] = i;
         }
     }
-    cout << ans << endl;
+    
+    int find(int a) {
+        if (parent[a] != a)
+            parent[a] = find(parent[a]); 
+        return parent[a];
+    }
+    
+    bool unite(int a, int b) {
+        a = find(a);
+        b = find(b);
+        if (a == b) return false; 
+        if (rank[a] < rank[b])
+            swap(a, b);
+        parent[b] = a;
+        if (rank[a] == rank[b])
+            rank[a]++;
+        return true;
+    }
+};
+
+void solve()
+{
+    int N, M;
+    cin >> N >> M;
+    DSU dsu(N);
+    vector<pair<int,int>> edges;
+    for (int i = 0; i < M; i++) {
+        int u, v;
+        cin >> u >> v;
+        edges.push_back({u, v});
+        dsu.unite(u, v);
+    }
+    int components = 0;
+    for (int i = 1; i <= N; i++) {
+        if (dsu.find(i) == i)
+            components++;
+    }
+    cout << M - (N - components) << "\n";
 }
 
 signed main()
