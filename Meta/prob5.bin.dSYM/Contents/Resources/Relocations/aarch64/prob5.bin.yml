@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/hs094/Downloads/Meta/prob5.bin'
+relocations:     []
+...
